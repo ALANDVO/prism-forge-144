@@ -1,0 +1,2 @@
+[inspect] test-page.html
+  [eyebrow] @1440px  1 eyebrow/kicker label(s) above headings: "REAL KICKER LABEL" above "Section Heading"

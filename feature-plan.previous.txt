@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "current_feature": "core-inspection",
+  "features": [
+    {
+      "id": "core-inspection",
+      "status": "done",
+      "acceptance": [
+        "Can inspect a local HTML file and report design issues",
+        "Serves the file from its own directory (not cwd) so root-relative assets work",
+        "Generates screenshots to a unique per-target output directory",
+        "Detects eyebrow/kicker labels above headings correctly (excludes figcaptions and scrolling content)"
+      ],
+      "implementation": [
+        "scripts/inspect.mjs",
+        "lib/probe.mjs",
+        "lib/inspection-files.mjs"
+      ],
+      "tests": [
+        "tests/inspection-files.mjs",
+        "tests/eyebrow-fix.mjs"
+      ]
+    },
+    {
+      "id": "cli-interface",
+      "title": "CLI Interface for Inspect",
+      "status": "planned",
+      "acceptance": [
+        "Accepts local file path or URL as target",
+        "Supports --widths flag for responsive testing",
+        "Supports --out flag to override output directory",
+        "Supports --allow flag to suppress specific checks"
+      ],
+      "implementation": [
+        "scripts/inspect.mjs"
+      ],
+      "tests": [
+        "tests/inspect-cli.mjs"
+      ]
+    },
+    {
+      "id": "eyebrow-fix",
+      "title": "Fix eyebrow false positives (figcaptions, scrolling lists)",
+      "status": "done",
+      "acceptance": [
+        "Text inside <figcaption> is not reported as eyebrow",
+        "Text inside scrolling/clipping containers is not reported as eyebrow",
+        "Real kickers (uppercase labels above headings) are still detected"
+      ],
+      "implementation": [
+        "lib/probe.mjs"
+      ],
+      "tests": [
+        "tests/eyebrow-fix.mjs"
+      ]
+    },
+    {
+      "id": "unique-output-dirs",
+      "title": "Unique default output directory per target",
+      "status": "done",
+      "acceptance": [
+        "Default output dir derived from target (file path slug or URL slug)",
+        "Concurrent runs on different targets don't overwrite each other",
+        "--out still overrides the default"
+      ],
+      "implementation": [
+        "lib/inspection-files.mjs",
+        "scripts/inspect.mjs"
+      ],
+      "tests": [
+        "tests/inspection-files.mjs"
+      ]
+    }
+  ]
+}
