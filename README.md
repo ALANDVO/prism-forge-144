@@ -1,4 +1,6 @@
-# prism-forge-144 (Design Taste Skill)
+# prism-forge-144 (Design Taste Skill) — Alan Vo
+
+Current version: `1.1.0`.
 
 > Work in progress. This checkpoint may be incomplete or fail tests. See PLAN.md and STATUS.md before use.
 
