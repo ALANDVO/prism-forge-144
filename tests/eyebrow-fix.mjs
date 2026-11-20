@@ -3,7 +3,7 @@
 
 import { test, describe } from "node:test";
 import assert from "node:assert";
-import { isInFigcaption, isInScrollingOrClippingContainer, looksLikeKicker } from "../lib/probe.mjs";
+import { isInFigcaption, looksLikeKicker } from "../lib/probe.mjs";
 
 describe("eyebrow detection fixes", () => {
   test("looksLikeKicker identifies uppercase kicker text", () => {
@@ -36,6 +36,23 @@ describe("eyebrow detection fixes", () => {
     assert(looksLikeKicker("AB", 13));
   });
 
-  // Note: isInFigcaption and isInScrollingOrClippingContainer require DOM
-  // and are tested via integration tests in inspect.mjs
+  test("isInFigcaption returns true for figcaption element", () => {
+    const figcaption = { tagName: "FIGCAPTION", parentElement: null };
+    assert(isInFigcaption(figcaption));
+  });
+
+  test("isInFigcaption returns false for non-figcaption element", () => {
+    const div = { tagName: "DIV", parentElement: null };
+    assert(!isInFigcaption(div));
+  });
+
+  test("isInFigcaption returns true for element inside nested figcaption", () => {
+    const span = { tagName: "SPAN", parentElement: { tagName: "FIGCAPTION", parentElement: null } };
+    assert(isInFigcaption(span));
+  });
+
+  test("isInFigcaption returns false for element outside figcaption", () => {
+    const div = { tagName: "DIV", parentElement: { tagName: "SECTION", parentElement: null } };
+    assert(!isInFigcaption(div));
+  });
 });
