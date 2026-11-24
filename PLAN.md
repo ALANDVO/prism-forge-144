@@ -10,10 +10,14 @@ continue-implementation
 
 ### continue-implementation — Continue implementation and resolve known failures
 
-Status: in_progress
+Status: done
 
 Acceptance:
 - Run checks, fix failures, and implement the next planned feature
+
+Implementation: `Issue #179: Local file serving uses file's directory as web root (scripts/inspect.mjs:44-46)`, `Issue #174: Unique default output directory per target (lib/inspection-files.mjs defaultOutDir())`, `Issue #175: Eyebrow detection excludes figcaptions and scrolling containers (scripts/inspect.mjs:229-233)`
+
+Tests: `tests/eyebrow-fix.mjs - 11 eyebrow detection unit tests`, `tests/inspection-files.mjs - 6 inspection file unit tests`
 
 ---
 
